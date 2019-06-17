@@ -14,22 +14,27 @@ int main()
 		cout << "\t\t ________________________________\n";
 		cout << "\t\t/*МОДУЛЬ ПАРОЛЬНОЙ АУТЕНТИФИКАЦИИ*\\\n\n";
 		do {
-			cout << "\t\tРежимы работы модуля:\n\t\t1-Добавить пользователя\n\t\t2-Удалить пользователя\n\t\t3-Сменить пароль\n\t\t0-Выход\n\n";
+			cout << "\t\tРежимы работы модуля:\n\t\t1-Авторизоваться\n\t\t2-Добавить пользователя\n\t\t3-Удалить пользователя\n\t\t4-Сменить пароль\n\t\t0-Выход\n\n";
 			cout << "\t\tВыберите режим работы: ";
 			cin >> op;
-			if (op > 3) {
+			if (op > 4) {
 				throw string("Недопустимый режим работы");
 			}
 			else if (op > 0) {
-
 				if (op == 1) {
+					cout << "\t\tВведите имя пользователя: ";
+					cin >> login;
+					cout << "\t\tВведите пароль: ";
+					cin >> password;
+					AuthorizationUser Acc;
+					Acc.AuthorAcc(login, password);
+				}
+				else if (op == 2) {
 					cout << "\t\tВведите имя пользователя: ";
 					cin >> login;
 					cout << "\t\tВведите пароль (*пароль должен содержать 8 или более символов*): ";
 					cin >> password;
 
-					if (password.size() < 8)
-						throw string("Слишком короткий пароль");
 					cout << "\t\tПовторите пароль: ";
 					cin >> password2;
 					if (password == password2)
@@ -41,29 +46,27 @@ int main()
 						throw string("Пароли не совпадают");
 					}
 				}
-				else if (op == 2)
-				{
-					cout << "\t\tВведите имя пользователя: ";
-					cin >> login;
-					cout << "\t\tВведите пароль: ";
-					cin >> password2;
-					DellUser dellAcc;
-					dellAcc.DellAcc(login, password2);
-				}
 				else if (op == 3)
 				{
 					cout << "\t\tВведите имя пользователя: ";
 					cin >> login;
-					cout << "\t\tВведите старый пароль: ";
-					cin >> password2;
-					DellUser dell;
-					dell.DellAcc(login, password2);
-					cout << "\t\tВведите новый пароль: ";
+					cout << "\t\tВведите пароль: ";
 					cin >> password;
-					if (password.size() < 8)
-						throw string("Слишком короткий пароль");
-					cout << "\t\tПовторите пароль: ";
+					DellUser dellAcc;
+					dellAcc.DellAcc(login, password);
+				}
+				else if (op == 4)
+				{
+					cout << "\t\tВведите имя пользователя: ";
+					cin >> login;
+					cout << "\t\tВведите старый пароль: ";
+					cin >> password;
+					DellUser dell;
+					dell.DellAcc(login, password);
+					cout << "\t\tВведите новый пароль: ";
 					cin >> password2;
+					cout << "\t\tПовторите пароль: ";
+					cin >> password;
 					if (password == password2)
 					{
 						RegUser addNewPass;
